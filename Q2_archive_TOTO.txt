@@ -1,0 +1,6 @@
+Nom: Théo Poret
+Date: 08-10-2025 13:44:55
+
+Contenu de TOTO.txt :
+TEST Workflow
+Taille (octets) de TOTO.txt: 13
