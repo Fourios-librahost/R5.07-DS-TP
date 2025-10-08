@@ -1,1 +1,8 @@
-Pas de fichier précédent pour comparaison
+14c14
+<                 sb.append('x');
+---
+>                 sb.append(j);
+21c21
+< Taille (octets/caractères): 545
+---
+> Taille (octets/caractères): 543
