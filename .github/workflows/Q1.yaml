@@ -24,5 +24,10 @@ jobs:
           git config --local user.name "Fourios-librahost"
           git config --local user.email "theo.poret05@gmail.com"
           git add Q1_archive_TOTO.txt
-          git commit -m "Q1: add Q1_archive_TOTO.txt"
-          git push
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Q1: add Q1_archive_TOTO.txt"
+            git pull --rebase origin main || true
+            git push origin main
+          fi
