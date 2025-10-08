@@ -7,9 +7,6 @@ permissions:
 jobs:
   q1:
     runs-on: ubuntu-latest
-    concurrency:
-      group: push-main
-      cancel-in-progress: true
     steps:
       - name: Checkout
         uses: actions/checkout@v4

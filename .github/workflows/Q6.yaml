@@ -11,7 +11,7 @@ jobs:
   q6:
     runs-on: ubuntu-latest
     concurrency:
-      group: push-main
+      group: q6-main-branch
       cancel-in-progress: true
     steps:
       - uses: actions/checkout@v4
@@ -52,7 +52,6 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "Q6: add Q6 archive and diff"
-            git fetch origin main
-            git rebase origin/main || true
+            git pull --rebase origin main || true
             git push --force-with-lease origin main
           fi
