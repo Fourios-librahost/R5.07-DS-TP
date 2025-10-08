@@ -8,7 +8,7 @@ public class Q6 {
             StringBuilder sb = new StringBuilder();
             for (int j = 1; j <= i; j++) {
                 if (j > 1) sb.append(" ");
-                sb.append('x');
+                sb.append(j);
             }
             System.out.println(sb.toString());
         }
