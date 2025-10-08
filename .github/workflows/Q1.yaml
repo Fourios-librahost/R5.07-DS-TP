@@ -1,0 +1,32 @@
+name: Q1 - Archive TOTO
+on: [push]
+
+permissions:
+  contents: write
+
+jobs:
+  q1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Ensure TOTO.txt exists
+        run: |
+          if [ ! -f TOTO.txt ]; then echo "Contenu_TOTO" > TOTO.txt; fi
+
+      - name: Create Q1 archive (copy)
+        run: |
+          cp TOTO.txt Q1_archive_TOTO.txt
+
+      - name: Commit and push
+        run: |
+          git config --local user.name "Fourios-librahost"
+          git config --local user.email "theo.poret05@gmail.com"
+          git add Q1_archive_TOTO.txt
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Q1: add Q1_archive_TOTO.txt"
+            git push
+          fi
