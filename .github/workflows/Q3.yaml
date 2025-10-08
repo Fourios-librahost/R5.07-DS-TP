@@ -26,9 +26,5 @@ jobs:
           git config --local user.name "Fourios-librahost"
           git config --local user.email "theo.poret05@gmail.com"
           git add Q3_archive_java.txt
-          if git diff --cached --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "Q3: add Q3_archive_java.txt"
-            git push
-          fi
+          git commit -m "Q3: add Q3_archive_java.txt"
+          git push

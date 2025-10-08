@@ -29,9 +29,5 @@ jobs:
           git config --local user.name "Fourios-librahost"
           git config --local user.email "theo.poret05@gmail.com"
           git add Q2_archive_TOTO.txt
-          if git diff --cached --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "Q2: add Q2_archive_TOTO.txt"
-            git push
-          fi
+          git commit -m "Q2: add Q2_archive_TOTO.txt"
+          git push
