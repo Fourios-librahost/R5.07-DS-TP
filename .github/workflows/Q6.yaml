@@ -11,7 +11,7 @@ jobs:
   q6:
     runs-on: ubuntu-latest
     concurrency:
-      group: q6-main-branch
+      group: push-main
       cancel-in-progress: true
     steps:
       - uses: actions/checkout@v4

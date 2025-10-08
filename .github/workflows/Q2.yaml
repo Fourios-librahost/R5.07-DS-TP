@@ -10,6 +10,9 @@ env:
 jobs:
   q2:
     runs-on: ubuntu-latest
+    concurrency:
+      group: push-main
+      cancel-in-progress: true
     steps:
       - uses: actions/checkout@v4
 
