@@ -50,5 +50,5 @@ jobs:
           else
             git commit -m "Q6: add Q6 archive and diff"
             git pull --rebase origin main || true
-            git push origin main
+            git push --force-with-lease origin main
           fi
