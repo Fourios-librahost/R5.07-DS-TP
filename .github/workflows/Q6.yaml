@@ -1,0 +1,54 @@
+name: Q6 - Archive Q6 with date+stats and diff
+on: [push]
+
+permissions:
+  contents: write
+
+env:
+  NAME: 'Théo Poret'
+
+jobs:
+  q6:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create dated Q6 archive with stats
+        run: |
+          DATE=$(date +'%d-%m-%Y-%H%M%S')
+          OUT=Q6_archive_${DATE}.txt
+          echo "Nom: $NAME" > $OUT
+          echo "" >> $OUT
+          echo "Contenu de Q6.java :" >> $OUT
+          cat Q6.java >> $OUT
+          echo "" >> $OUT
+          echo "Taille (octets/caractères): $(wc -c < Q6.java)" >> $OUT
+          echo "Nombre de lignes: $(wc -l < Q6.java)" >> $OUT
+
+      - name: Create diff between last two archives (if possible)
+        shell: bash
+        run: |
+          shopt -s nullglob
+          files=(Q6_archive_*.txt)
+          if [ ${#files[@]} -lt 2 ]; then
+            echo "Pas de fichier précédent pour comparaison" > Q6_différences.txt
+          else
+            # files are unsorted; sort by mtime descending
+            mapfile -t sorted < <(ls -1t Q6_archive_*.txt)
+            a1="${sorted[0]}"
+            a2="${sorted[1]}"
+            diff "$a2" "$a1" > Q6_différences.txt || true
+          fi
+
+      - name: Commit and push archives and diff
+        run: |
+          git config --local user.name "${GITHUB_ACTOR}"
+          git config --local user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git add Q6_archive_*.txt Q6_différences.txt
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Q6: add Q6 archive and diff"
+            git pull --rebase origin main || true
+            git push origin main
+          fi
