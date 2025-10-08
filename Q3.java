@@ -1,0 +1,19 @@
+public class Q3 {
+    public static void main(String[] args) {
+        int n = 10;
+        if (args.length > 0) {
+            try {
+                n = Integer.parseInt(args[0]);
+            } catch (NumberFormatException e) {
+                System.err.println("L'argument doit être un entier.");
+                System.exit(1);
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i <= n; i++) {
+            sb.append(i);
+            if (i < n) sb.append(" ");
+        }
+        System.out.println(sb.toString());
+    }
+}

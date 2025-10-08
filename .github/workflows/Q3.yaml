@@ -1,4 +1,4 @@
-name: Q2 - Archive TOTO avec meta
+name: Q3 - Archive Q3.java
 on: [push]
 
 permissions:
@@ -8,30 +8,27 @@ env:
   NOM: 'Théo Poret'
 
 jobs:
-  q2:
+  q3:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Create Q2 archive with metadata
+      - name: Create Q3 archive file (contains name + Q3.java)
         run: |
-          OUT=Q2_archive_TOTO.txt
+          OUT=Q3_archive_java.txt
           echo "Nom: $NOM" > $OUT
-          echo "Date: $(date '+%d-%m-%Y %H:%M:%S')" >> $OUT
           echo "" >> $OUT
-          echo "Contenu de TOTO.txt :" >> $OUT
-          cat TOTO.txt >> $OUT
-          echo "" >> $OUT
-          echo "Taille (octets) de TOTO.txt: $(wc -c < TOTO.txt)" >> $OUT
+          echo "Contenu de Q3.java :" >> $OUT
+          cat Q3.java >> $OUT
 
       - name: Commit and push
         run: |
           git config --local user.name "Fourios-librahost"
           git config --local user.email "theo.poret05@gmail.com"
-          git add Q2_archive_TOTO.txt
+          git add Q3_archive_java.txt
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "Q2: add Q2_archive_TOTO.txt"
+            git commit -m "Q3: add Q3_archive_java.txt"
             git push
           fi
