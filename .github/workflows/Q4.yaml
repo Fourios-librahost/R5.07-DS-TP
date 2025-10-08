@@ -24,12 +24,13 @@ jobs:
 
       - name: Commit and push
         run: |
-          git config --local user.name "${GITHUB_ACTOR}"
-          git config --local user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git config --local user.name "Fourios-librahost"
+          git config --local user.email "theo.poret05@gmail.com"
           git add Q4_archive_*.txt
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
             git commit -m "Q4: add Q4 dated archive"
-            git push
+            git pull --rebase origin main || true
+            git push origin main
           fi
