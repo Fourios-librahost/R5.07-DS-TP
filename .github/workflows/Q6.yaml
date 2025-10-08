@@ -42,8 +42,8 @@ jobs:
 
       - name: Commit and push archives and diff
         run: |
-          git config --local user.name "${GITHUB_ACTOR}"
-          git config --local user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git config --local user.name "Fourios-librahost"
+          git config --local user.email "theo.poret05@gmail.com"
           git add Q6_archive_*.txt Q6_différences.txt
           if git diff --cached --quiet; then
             echo "No changes to commit"
