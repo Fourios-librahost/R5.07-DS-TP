@@ -1,0 +1,35 @@
+name: Q5 - Archive Q5.java with date
+on: [push]
+
+permissions:
+  contents: write
+
+env:
+  NAME: 'Théo Poret'
+
+jobs:
+  q5:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create dated archive for Q5
+        run: |
+          DATE=$(date +'%d-%m-%Y')
+          OUT=Q5_archive_${DATE}.txt
+          echo "Nom: $NAME" > $OUT
+          echo "" >> $OUT
+          echo "Contenu de Q5.java :" >> $OUT
+          cat Q5.java >> $OUT
+
+      - name: Commit and push
+        run: |
+          git config --local user.name "Fourios-librahost"
+          git config --local user.email "theo.poret05@gmail.com"
+          git add Q5_archive_*.txt
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Q5: add Q5 dated archive"
+            git push
+          fi
