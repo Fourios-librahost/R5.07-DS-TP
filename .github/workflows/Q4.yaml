@@ -1,0 +1,35 @@
+name: Q4 - Archive Q4.java with date
+on: [push]
+
+permissions:
+  contents: write
+
+env:
+  NAME: 'Théo Poret'
+
+jobs:
+  q4:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create dated archive for Q4
+        run: |
+          DATE=$(date +'%d-%m-%Y')
+          OUT=Q4_archive_${DATE}.txt
+          echo "Nom: $NAME" > $OUT
+          echo "" >> $OUT
+          echo "Contenu de Q4.java :" >> $OUT
+          cat Q4.java >> $OUT
+
+      - name: Commit and push
+        run: |
+          git config --local user.name "${GITHUB_ACTOR}"
+          git config --local user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git add Q4_archive_*.txt
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Q4: add Q4 dated archive"
+            git push
+          fi
